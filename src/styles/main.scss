@@ -1,3 +1,51 @@
-body {
-  margin: 0;
+@import "variables";
+@import "reset";
+@import "mixin";
+
+.container {
+  height: 100vh;
+  @include display;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  width: ($size + ($margin * 2)) * 7;
+}
+
+@for $i from 28 through 31 {
+  .calendar-#{$i} {
+
+    @for $j from 1 through $i {
+      & :nth-child(#{$j}) {
+        @include display;
+        @include box-style;
+        @include cell-size;
+        transition: transform 0.5s;
+      }
+
+      & :nth-child(#{$j}):hover {
+        transform: translate(0 , -20px);
+        cursor: pointer;
+        background-color: #f3beca;
+      }
+
+      & :nth-child(#{$j})::after {
+        content: "#{$j}";
+      }
+    }
+  }
+}
+
+$name-of-days:
+  "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
+
+@each $name, $amount in $name-of-days {
+  .calendar-#{$name} {
+    div:first-child {
+      margin-left: ($size + ($margin * 2)) * $amount;
+    }
+  }
 }
