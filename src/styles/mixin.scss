@@ -1,0 +1,17 @@
+@mixin display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin box-style {
+  box-sizing: border-box;
+  border: 1px solid black;
+  background-color: #eee;
+}
+
+@mixin cell-size {
+  width: $size;
+  height: $size;
+  margin: $margin;
+}
