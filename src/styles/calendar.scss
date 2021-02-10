@@ -5,21 +5,25 @@
 
   width: ($size + ($margin * 2)) * 7;
 
+  & div {
+    display: none;
+    @include box-style;
+    @include cell-size;
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: translate(0 , -20px);
+      cursor: pointer;
+      background-color: #f3beca;
+    }
+  }
+
   @for $i from 28 through 31 {
     &-#{$i} {
 
       @for $j from 1 through $i {
         & :nth-child(#{$j}) {
           @include display;
-          @include box-style;
-          @include cell-size;
-          transition: transform 0.5s;
-
-          &:hover {
-            transform: translate(0 , -20px);
-            cursor: pointer;
-            background-color: #f3beca;
-          }
 
           &::after {
             content: "#{$j}";
@@ -32,7 +36,7 @@
   @each $name, $amount in $name-of-days {
     &-#{$name} {
       div:first-child {
-        margin-left: ($size + ($margin * 2)) * $amount;
+        margin-left: $margin + ($size + ($margin * 2)) * $amount;
       }
     }
   }
