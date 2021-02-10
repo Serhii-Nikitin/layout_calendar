@@ -1,0 +1,39 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  width: ($size + ($margin * 2)) * 7;
+
+  @for $i from 28 through 31 {
+    &-#{$i} {
+
+      @for $j from 1 through $i {
+        & :nth-child(#{$j}) {
+          @include display;
+          @include box-style;
+          @include cell-size;
+          transition: transform 0.5s;
+
+          &:hover {
+            transform: translate(0 , -20px);
+            cursor: pointer;
+            background-color: #f3beca;
+          }
+
+          &::after {
+            content: "#{$j}";
+          }
+        }
+      }
+    }
+  }
+
+  @each $name, $amount in $name-of-days {
+    &-#{$name} {
+      div:first-child {
+        margin-left: ($size + ($margin * 2)) * $amount;
+      }
+    }
+  }
+}
